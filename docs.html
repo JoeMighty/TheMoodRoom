@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Documentation - The Mood Room</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --card-bg: #1f2833;
+      --primary: #66fcf1;
+      --primary-dark: #45f3ff;
+      --text: #c5c6c7;
+      --text-heading: #ffffff;
+      --code-bg: #0b0c10;
+      --border: #2c3540;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .docs-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      color: var(--text-heading);
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      color: var(--text-heading);
+      font-size: 1.8rem;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      color: var(--primary);
+      font-size: 1.25rem;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    code {
+      font-family: Consolas, Monaco, "Andale Mono", monospace;
+      background-color: var(--code-bg);
+      color: var(--primary);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+
+    pre code {
+      background-color: transparent;
+      color: var(--text);
+      padding: 0;
+      font-size: 0.95em;
+    }
+
+    .note-box {
+      background-color: rgba(102, 252, 241, 0.05);
+      border-left: 4px solid var(--primary);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 24px;
+    }
+
+    .note-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="docs-container">
+    <header>
+      <h1>The Mood Room - Documentation</h1>
+      <p>Technical architecture details and step-by-step setup guides.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>1. Technical Architecture</h2>
+        <p>
+          "The Mood Room" operates as a completely serverless static application. This keeps running costs strictly at zero while delivering real-time capabilities.
+        </p>
+        <ul>
+          <li><strong>Frontend:</strong> Pure HTML5, CSS3, and JavaScript (ES Modules). No heavy frameworks, bundlers, or Node.js compilers are required.</li>
+          <li><strong>Database & Sync:</strong> Cloud Firestore (Firebase). Enables real-time document listeners so participant thoughts animate onto the display screen instantly.</li>
+          <li><strong>Content Moderation:</strong> Dual-layer validation (Local regex word boundaries followed by a keyless REST API filter query to PurgoMalum).</li>
+          <li><strong>Hosting:</strong> GitHub Pages (Static hosting).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. Firebase Setup Guide</h2>
+        <p>Follow these steps to connect your Firebase project (<code>themoodroom-24902</code>) to the codebase:</p>
+
+        <h3>Step A: Register the Web App</h3>
+        <ol>
+          <li>Open the <a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a>.</li>
+          <li>Select your project <strong>TheMoodRoom</strong>.</li>
+          <li>Under the project title overview, click the <strong>Web icon (<code>&lt;/&gt;</code>)</strong>.</li>
+          <li>Enter the App Nickname: <code>The Mood Room Web App</code>.</li>
+          <li>Leave "Also set up Firebase Hosting" <strong>unchecked</strong> and click <strong>Register App</strong>.</li>
+          <li>Copy the <code>apiKey</code> and <code>appId</code> values from the generated configuration block.</li>
+        </ol>
+
+        <h3>Step B: Update Configuration File</h3>
+        <p>Open <code>js/firebase-config.js</code> in your code editor and update the API Key and App ID:</p>
+        <pre><code>const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY_HERE",
+  authDomain: "themoodroom-24902.firebaseapp.com",
+  projectId: "themoodroom-24902",
+  storageBucket: "themoodroom-24902.appspot.com",
+  messagingSenderId: "1033227730513",
+  appId: "PASTE_YOUR_APP_ID_HERE"
+};</code></pre>
+
+        <h3>Step C: Enable Cloud Firestore</h3>
+        <ol>
+          <li>In the Firebase Console sidebar, click <strong>Build</strong> -> <strong>Firestore Database</strong>.</li>
+          <li>Click the <strong>Create database</strong> button.</li>
+          <li>Select <strong>Standard</strong> (billing/plan) and click Next.</li>
+          <li>Choose your database location (select a location closest to your physical installation site) and click Next.</li>
+          <li>Select <strong>Start in test mode</strong> and click <strong>Create</strong>.</li>
+        </ol>
+
+        <h3>Step D: Configure Database Rules</h3>
+        <ol>
+          <li>Navigate to the <strong>Rules</strong> tab at the top of your Firestore Database dashboard.</li>
+          <li>Paste the following configuration (copied from <code>firestore.rules</code>) into the editor:</li>
+        </ol>
+        <pre><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /exhibitThoughts/{document} {
+      allow read, write: if true;
+    }
+  }
+}</code></pre>
+        <ol start="3">
+          <li>Click <strong>Publish</strong>.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>3. Deployment (GitHub Pages)</h2>
+        <ol>
+          <li>Ensure all changes are committed in Git:
+            <pre><code>git add .
+git commit -m "Initialize installation code"
+git push</code></pre>
+          </li>
+          <li>Navigate to your repository page on GitHub (<code>https://github.com/JoeMighty/TheMoodRoom</code>).</li>
+          <li>Click the <strong>Settings</strong> tab.</li>
+          <li>Select <strong>Pages</strong> in the left sidebar under "Code and automation".</li>
+          <li>Under <strong>Build and deployment</strong>, choose "Deploy from a branch", set branch to <code>main</code>, and choose folder <code>/ (root)</code>.</li>
+          <li>Click <strong>Save</strong>. The application will be live in 1–2 minutes.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>4. Live URLs</h2>
+        <ul>
+          <li><strong>Main Display Screen:</strong> <code>https://joemighty.github.io/TheMoodRoom/index.html</code></li>
+          <li><strong>Mobile Submission portal:</strong> <code>https://joemighty.github.io/TheMoodRoom/submit.html</code></li>
+        </ul>
+        <div class="note-box">
+          <p><strong>Note:</strong> A dynamic QR code has been built directly into the bottom-right corner of <code>index.html</code>. It automatically references your live GitHub Pages link so users can scan the screen directly to open the submission form.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>

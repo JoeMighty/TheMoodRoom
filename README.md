@@ -15,87 +15,45 @@ Built with pure, lightweight, serverless technologies: Vanilla HTML5, CSS3, and 
 
 ---
 
-## 1. Firebase Setup Guide
+## 🎨 Visual Concept & Experience
 
-Since you've already created your Firebase project **TheMoodRoom** (`themoodroom-24902`), follow these steps to register the web app, set up Firestore, and connect it to this codebase.
+"The Mood Room" acts as a breathing emotional landscape. Submissions from mobile devices are rendered as floating, glassmorphic bubbles containing the participant's thought, a name initial, and a matching emoji. 
 
-### Step A: Get your API Key & App ID
-1. Open the [Firebase Console](https://console.firebase.google.com/).
-2. Select your project **TheMoodRoom**.
-3. In the center of the project overview page, click the **Web icon ( `</>` )** to register a new application.
-4. Enter an App Nickname (e.g., `The Mood Room Web App`). Leave "Also set up Firebase Hosting" **unchecked** (we will use GitHub Pages for free hosting).
-5. Click **Register App**.
-6. Firebase will display a code snippet containing your `firebaseConfig` object. Copy the values for:
-   * `"apiKey"`
-   * `"appId"`
-7. Open the file [js/firebase-config.js](file:///c:/Users/jobiz/Documents/Work/Jobin%20Bennykutty/Web%20Apps/Antigravity/The%20Mood%20Room/js/firebase-config.js) in your text editor.
-8. Replace `"YOUR_API_KEY"` with your copied API key and `"YOUR_APP_ID"` with your copied App ID. Save the file.
-   *(Note: The Project ID, Project Number, and other settings are already pre-filled for you!)*
-
-### Step B: Enable Cloud Firestore
-1. In the left-hand navigation sidebar of the Firebase console, click on **Build** -> **Firestore Database**.
-2. Click the **Create database** button.
-3. **Location:** Select a database location closest to your exhibition site (e.g. `nam5 (us-central)` or a location in Europe/Asia) and click **Next**.
-4. **Security Rules:** Select **Start in test mode** (this is fine, as we will configure custom rules in the next step). Click **Create**.
-
-### Step C: Deploy Firestore Security Rules
-1. In the Firestore Database dashboard, click on the **Rules** tab at the top.
-2. Open the local file [firestore.rules](file:///c:/Users/jobiz/Documents/Work/Jobin%20Bennykutty/Web%20Apps/Antigravity/The%20Mood%20Room/firestore.rules) in this codebase.
-3. Copy the entire contents of that file and paste it into the editor in the Firebase Console Rules tab, overwriting the default rules.
-4. Click **Publish**.
-   *This grants public read and write access strictly to the `exhibitThoughts` collection so participants can submit thoughts and the projection screen can read them in real time.*
+*   **Atmosphere:** Deep dark gray radial-gradient backgrounds with subtle grid details.
+*   **Aesthetics:** Translucent glassmorphism (`backdrop-filter`) with custom neon glowing borders.
+*   **Motion:** Staggered floating animations which sway out-of-sync to simulate an organic collective cloud.
 
 ---
 
-## 2. Local Testing & Visual Tour
+## 🚀 Key Features
 
-Because this is a serverless static site, you can test it locally in your browser.
-
-1. Open `index.html` in your browser. This is the **Projection Screen** display.
-2. Open `submit.html` in another browser tab (or resize it to look like a mobile device). This is the **Participant Submission Form**.
-3. Submit a thought from `submit.html` (e.g., *"Feeling nervous but excited about tonight."* + select **🌟 Excited** emoji).
-4. Swap back to the `index.html` tab. You should see your thought bubble instantly animate onto the screen with a golden glow and float gently!
-5. Test the **15-thought limit**: Submit 16 thoughts. You will notice that when the 16th thought is added, the 1st (oldest) thought fades out smoothly and is deleted from the screen.
-
----
-
-## 3. Deployment to GitHub Pages (Free Hosting)
-
-To launch the project for your exhibition, deploy it to GitHub Pages.
-
-### Step A: Verify Git setup
-Ensure you have committed your changes. In your terminal, configure Git to commit using your GitHub proxy email:
-```bash
-git add .
-git commit -m "Initialize The Mood Room application"
-```
-
-### Step B: Push to your GitHub Repository
-Push the codebase to your remote repository:
-```bash
-git push -u origin main
-```
-
-### Step C: Enable GitHub Pages
-1. Go to your GitHub repository: `https://github.com/JoeMighty/TheMoodRoom`
-2. Click on the **Settings** tab.
-3. In the left-hand sidebar, scroll down to the **Code and automation** section and click on **Pages**.
-4. Under **Build and deployment**:
-   * **Source:** Select **Deploy from a branch**.
-   * **Branch:** Select `main` (or `master`) and folder `/ (root)`.
-5. Click **Save**.
-6. Wait 1–2 minutes. GitHub will generate a live URL for your project (e.g., `https://joemighty.github.io/TheMoodRoom/`).
-
-### Step D: Accessing the Live App
-Once deployed, the pages are accessible at:
-* **Main Projection Screen:** `https://joemighty.github.io/TheMoodRoom/index.html`
-  * *Open this URL on the computer hooked up to the main projector, and press `F11` to make the browser fullscreen.*
-* **Mobile Submission Portal:** `https://joemighty.github.io/TheMoodRoom/submit.html`
-  * *Generate a QR code linking to this URL and print it out on your physical signage for attendees to scan.*
+*   **Real-time Beaming:** Live Firestore sync loads new thoughts instantly without refreshing the page.
+*   **The 15-Thought Limit (FIFO):** The screen displays a maximum of 15 thoughts. When the 16th thought is added, the oldest thought is targeted, faded out, and removed from the screen.
+*   **Balanced Anonymity:** Displays first initials of names (e.g. "J.") to provide a personal connection while keeping submissions anonymous.
+*   **Emotion Mapping:** 8 emotional categories mapped to tailored colors (Mint, Rose, Slate, Amber, Violet, Coral, Crimson, Emerald) dictating glows and background hues.
+*   **Content Moderation:** Staged local regex checks backed by the PurgoMalum API to filter profanity.
+*   **Built-in QR Code:** The projection screen features an elegant QR code in the bottom-right corner that dynamically links straight to the live submission form.
 
 ---
 
-## 4. Visual Elements & Customization
+## 📂 Codebase Modules
 
-* **Emotion Mapping:** If you want to change the colors of the emotions or add new emojis, edit [css/style.css](file:///c:/Users/jobiz/Documents/Work/Jobin%20Bennykutty/Web%20Apps/Antigravity/The%20Mood%20Room/css/style.css). The color variables are located at the top under `:root`.
-* **Content Moderation:** Local blocklist words are managed in [js/moderation.js](file:///c:/Users/jobiz/Documents/Work/Jobin%20Bennykutty/Web%20Apps/Antigravity/The%20Mood%20Room/js/moderation.js). You can expand the `LOCAL_BLOCKLIST` array to instantly filter out additional specific words.
+*   **[index.html](index.html) / [js/app.js](js/app.js):** The projection screen listener, grid assignment slots (collision avoidance), and bubble manager.
+*   **[submit.html](submit.html) / [js/submit.js](js/submit.js):** Participant mobile form with active character count validation and emoji indicators.
+*   **[css/style.css](css/style.css):** Styling system, color definitions, layouts, and animations.
+*   **[js/moderation.js](js/moderation.js):** Staged local and remote profanity filters.
+*   **[firestore.rules](firestore.rules):** Firestore database access controls.
+
+---
+
+<div align="center">
+
+### 🛠️ Setup & Technical Documentation
+
+For step-by-step guides on Firebase console setup, security rule publishing, local testing, and GitHub Pages deployment, open the developer documentation:
+
+### [👉 Read docs.html (Developer Guide)](docs.html)
+
+*(This file is part of the codebase repository and is not linked on the public-facing exhibition screens)*
+
+</div>
