@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Mood Room - Live Art Installation</title>
+  <meta name="description" content="A collective, real-time emotional landscape displaying anonymous thoughts.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="overflow: hidden;">
+  <!-- Subtle ambient background grid overlay -->
+  <div class="bg-overlay"></div>
+
+  <!-- Projection screen container -->
+  <div id="projectionScreen" class="projection-container">
+    
+    <!-- Minimal ambient header -->
+    <header class="ambient-header">
+      <h1>The Mood Room</h1>
+      <p>A collective breathing landscape</p>
+    </header>
+
+    <!-- Thought bubbles will be injected here dynamically by js/app.js -->
+
+    <!-- Minimal ambient footer with instructions -->
+    <footer class="ambient-footer">
+      <div class="qr-instruction">
+        <p>Scan to share a thought. Choose an emotion. Watch it fade.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Load JavaScript Logic -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

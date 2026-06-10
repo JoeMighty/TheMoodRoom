@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beam a Thought - The Mood Room</title>
+  <meta name="description" content="Share your raw thought and connect your emotion to The Mood Room interactive art installation.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient background overlay -->
+  <div class="bg-overlay"></div>
+
+  <div class="submit-wrapper">
+    <main id="mainContainer" class="submit-container glass-panel">
+      <!-- 1. Submission Form (Shown by default) -->
+      <section id="formSection">
+        <header class="submit-header">
+          <h2>The Mood Room</h2>
+          <p>Beam a thought, choose an emotion, and watch it join the landscape.</p>
+        </header>
+
+        <!-- Error toast for validation / profanity feedback -->
+        <div id="errorToast" class="toast-msg"></div>
+
+        <form id="submissionForm" onsubmit="return false;">
+          <!-- Thought text area -->
+          <div class="form-group">
+            <label for="thoughtInput" class="form-label">Your Thought</label>
+            <textarea 
+              id="thoughtInput" 
+              class="textarea-field" 
+              placeholder="What are you carrying in your mind right now?..." 
+              maxlength="100" 
+              required
+            ></textarea>
+            <span id="charCounter" class="char-counter">0 / 100</span>
+          </div>
+
+          <!-- Name input (optional) -->
+          <div class="form-group">
+            <label for="nameInput" class="form-label">Your Initial / Name (Optional)</label>
+            <input 
+              type="text" 
+              id="nameInput" 
+              class="input-field" 
+              placeholder="e.g. Alex, J, or leave empty" 
+              maxlength="20"
+            >
+          </div>
+
+          <!-- Emoji Emotion selector -->
+          <div class="form-group">
+            <label class="form-label">How does this thought feel?</label>
+            <div id="emojiGrid" class="emoji-selector">
+              <button type="button" class="emoji-btn" data-emotion="calm" data-emoji="😌">
+                <span class="emoji-icon">😌</span>
+                <span class="emoji-label">Calm</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="excited" data-emoji="🌟">
+                <span class="emoji-icon">🌟</span>
+                <span class="emoji-label">Excited</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="love" data-emoji="❤️">
+                <span class="emoji-icon">❤️</span>
+                <span class="emoji-label">Love</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="sad" data-emoji="😢">
+                <span class="emoji-icon">😢</span>
+                <span class="emoji-label">Sad</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="angry" data-emoji="😡">
+                <span class="emoji-icon">😡</span>
+                <span class="emoji-label">Angry</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="wonder" data-emoji="🌌">
+                <span class="emoji-icon">🌌</span>
+                <span class="emoji-label">Wonder</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="envy" data-emoji="🤢">
+                <span class="emoji-icon">🤢</span>
+                <span class="emoji-label">Envy</span>
+              </button>
+              <button type="button" class="emoji-btn" data-emotion="awe" data-emoji="😮">
+                <span class="emoji-icon">😮</span>
+                <span class="emoji-label">Awe</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submitBtn" class="btn-submit" disabled>
+            <span class="btn-text">Beam Into Room</span>
+            <div class="spinner"></div>
+          </button>
+        </form>
+      </section>
+
+      <!-- 2. Success screen (Hidden by default) -->
+      <section id="successSection" class="success-screen">
+        <div class="success-icon">✨</div>
+        <h3>Thought Beamed!</h3>
+        <p>Look up at the screen. Your emotion has dissolved into the room's collective mood.</p>
+        <button type="button" id="resetBtn" class="btn-secondary">Share Another Thought</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- Load JavaScript Logic -->
+  <script type="module" src="js/submit.js"></script>
+</body>
+</html>
