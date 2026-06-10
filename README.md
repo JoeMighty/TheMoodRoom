@@ -1,8 +1,17 @@
+<div align="center">
+
 # The Mood Room 🌌
 
 An interactive, real-time art installation that bridges a mobile-accessible submission portal with a large-scale collective projection display. Attendees scan a QR code to submit a raw thought and attach an emotion via an emoji, which then sways and floats on a shared physical projection screen.
 
 Built with pure, lightweight, serverless technologies: Vanilla HTML5, CSS3, and JavaScript, backed by Google Firebase Firestore.
+
+[![Platform - Web](https://img.shields.io/badge/Platform-Web-3b82f6?style=plastic)](submit.html)
+[![Database - Firestore](https://img.shields.io/badge/Database-Firebase_Firestore-ffca28?logo=firebase&style=plastic)](https://firebase.google.com/)
+[![Moderation - PurgoMalum](https://img.shields.io/badge/Moderation-PurgoMalum-8b5cf6?style=plastic)](https://www.purgomalum.com/)
+[![Tech Stack - Vanilla HTML/CSS/JS](https://img.shields.io/badge/Tech_Stack-HTML5%20%7C%20CSS3%20%7C%20JS-10b981?style=plastic)](#)
+
+</div>
 
 ---
 
